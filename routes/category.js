@@ -32,13 +32,13 @@ router.post('/:categoryId/questions', (req, res) => {
     //Formatting Incoming Questions
     const newQuestion = { 
         categoryId,
-        "questionId": uuidv4(),
+        questionId: uuidv4(),
         user,
         question,
-        "timestamp": Date.now(),
-        "upvotes": 0,
-        "affirmative": [],
-        "negative": []
+        timestamp: Date.now(),
+        upvotes: 0,
+        affirmative: [],
+        negative: []
     }
 
     const newQuestionData = [ ...JSON.parse(questionDataJson), newQuestion ];
