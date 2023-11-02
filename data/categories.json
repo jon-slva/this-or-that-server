@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "This or That?"
+    },
+    {
+        "id": 2,
+        "name": "Pop Culture"
+    },
+    {
+        "id": 3,
+        "name": "Health & Fitness"
+    },
+    {
+        "id": 4,
+        "name": "Politics"
+    },
+    {
+        "id": 5,
+        "name": "Real or Conspiracy?"
+    }
+]
