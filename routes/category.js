@@ -10,13 +10,11 @@ const categoryFilePath = './data/categories.json'
 
 router.get('/', (req, res) => {
     const categoryData = fs.readFileSync(categoryFilePath)
-    // console.log("Categories and questions GET");
     res.status(200).send(categoryData);
 })
 
 router.get('/:categoryId/questions', (req, res) => {
     const questionDataJson = fs.readFileSync(questionsFilePath)
-    // console.log("Categories and questions GET");
     const { categoryId } = req.params;
     const questionData = JSON.parse(questionDataJson);
     const categoryQuestions = questionData.filter((question) => question.categoryId === categoryId);
@@ -26,9 +24,9 @@ router.get('/:categoryId/questions', (req, res) => {
 
 router.post('/:categoryId/questions', (req, res) => {
     const questionDataJson = fs.readFileSync(questionsFilePath)
-    // console.log("Categories and questions POST");
     const {user, question} = req.body;
     const {categoryId} = req.params;
+    
     //Formatting Incoming Questions
     const newQuestion = { 
         categoryId,
