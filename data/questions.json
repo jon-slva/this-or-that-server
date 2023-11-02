@@ -1,7 +1,7 @@
 [
     {
         "categoryId": 1,
-        "id": 1234,
+        "id": "1234",
         "user": "ollie678",
         "question": "Chicago Pizza is inferior to New York Pizza.",
         "timestamp": 1634283600,
@@ -9,7 +9,7 @@
         "affirmative": [
             {
                 "id": "123",
-                "upvotes": 13,
+                "upvotes": 0,
                 "user": "Jon456",
                 "answer": "This is cool.",
                 "timestamp": 1634583600
@@ -17,8 +17,8 @@
         ],
         "negative": [
             {
-                "id": "1234",
-                "upvotes": 63,
+                "id": "123674",
+                "upvotes": 0,
                 "user": "Gabriel",
                 "answer": "No this sucks!",
                 "timestamp": 1634583600

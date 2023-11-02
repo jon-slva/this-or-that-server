@@ -1,34 +1,52 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuid4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 
 // Data Paths
-const questionsData = './data/questions.json'
+const questionsFilePath = './data/questions.json'
+const categoryFilePath = './data/categories.json'
 
-//Formatting Incoming Questions
-const newQuestion = { //re-wraite this for later
-    "categoryId": 1,
-    "questionId": uuidv4(),
-    user,
-    question,
-    "timestamp": 1634283600,
-    "upvotes": 0,
-    "affirmative": [],
-    "negative": []
-}
 
-router.get('/category/:categoryId/questions', (req, res) => {
-    console.log("Categories and questions GET");
-    res.status(200).send(questionsData);
+router.get('/', (req, res) => {
+    const categoryData = fs.readFileSync(categoryFilePath)
+    // console.log("Categories and questions GET");
+    res.status(200).send(categoryData);
 })
 
-router.post('/category/:categoryId/questions', (req, res) => {
-    console.log("Categories and questions POST");
+router.get('/:categoryId/questions', (req, res) => {
+    const questionDataJson = fs.readFileSync(questionsFilePath)
+    // console.log("Categories and questions GET");
+    const { categoryId } = req.params;
+    const questionData = JSON.parse(questionDataJson);
+    const categoryQuestions = questionData.filter((question) => question.categoryId === categoryId);
 
-    const newQuestionData = fsreadFileSync(questionsData)
-    
-    res.status(200).send(questionsData);
+    res.status(200).json(categoryQuestions);
 })
 
+router.post('/:categoryId/questions', (req, res) => {
+    const questionDataJson = fs.readFileSync(questionsFilePath)
+    // console.log("Categories and questions POST");
+    const {user, question} = req.body;
+    const {categoryId} = req.params;
+    //Formatting Incoming Questions
+    const newQuestion = { 
+        categoryId,
+        "questionId": uuidv4(),
+        user,
+        question,
+        "timestamp": Date.now(),
+        "upvotes": 0,
+        "affirmative": [],
+        "negative": []
+    }
 
+    const newQuestionData = [ ...JSON.parse(questionDataJson), newQuestion ];
+
+    fs.writeFileSync(questionsFilePath, JSON.stringify(newQuestionData));
+
+    const categoryQuestions = newQuestionData.filter((question) => question.categoryId === categoryId);
+    res.status(201).json(categoryQuestions);
+})
+
+module.exports = router;

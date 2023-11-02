@@ -1,18 +1,16 @@
 const express = require('express');
-const router = express.Router();
+const cors = require("cors");
+// Routes
 const questionsRoutes = require("./routes/questions")
+const categoryRoutes = require("./routes/category")
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 
-// need data input here
-const categoriesData = './data/categories.json'
+app.use("/categories", categoryRoutes);
+app.use("/questions", questionsRoutes);
 
-console.log(questionsRoutes)
-
-router.get('/categories', (req, res) => {
-    console.log("Categories Endpoint");
-    res.status(200).send(categoriesData)
-});
 
 app.listen(8080, () => {
     console.log('listening on port 8080')
